@@ -14,9 +14,13 @@ export SHELL=/bin/bash
 # setting up users
 if [ "$OWNER" != "" ] && [ "$CONNECT_GROUP" != "" ]; then
     PATH=$PATH:/usr/sbin
-    /sync_users_debian.sh -u root."$CONNECT_GROUP" -g root."$CONNECT_GROUP" -e https://api.ci-connect.net:18080
+    #/sync_users_debian.sh -u root."$CONNECT_GROUP" -g root."$CONNECT_GROUP" -e https://api.ci-connect.net:18080
+    groupadd $CONNECT_GROUP -g $CONNECT_GID
+    useradd -M -u $OWNER_UID -G $CONNECT_GROUP $OWNER
     # Do not leak some important tokens
     unset API_TOKEN
+    # Ensure the owner owns their home directory
+    chown -R $OWNER: /home/$OWNER
     # Set the user's $DATA dir
     export DATA=/data/$OWNER
     # Match PS1 as we have it on the login nodes
@@ -43,4 +47,3 @@ if [ "$OWNER" != "" ] && [ "$CONNECT_GROUP" != "" ]; then
     su $OWNER -c "jupyter lab --ServerApp.root_dir=/home/${OWNER} --no-browser --config=/usr/local/etc/jupyter_notebook_config.py"
 
 fi 
-
