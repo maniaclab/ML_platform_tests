@@ -19,8 +19,8 @@ if [ "$OWNER" != "" ] && [ "$CONNECT_GROUP" != "" ]; then
     useradd -M -u $OWNER_UID -G $CONNECT_GROUP $OWNER
     # Do not leak some important tokens
     unset API_TOKEN
-    # Ensure the owner owns their home directory
-    chown -R $OWNER: /home/$OWNER
+    # Ensure the owner owns their home directory ## Commented out 7/17 by L.B., causing issues with taking too long
+    #chown -R $OWNER: /home/$OWNER
     # Set the user's $DATA dir
     export DATA=/data/$OWNER
     # Match PS1 as we have it on the login nodes
