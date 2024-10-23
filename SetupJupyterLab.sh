@@ -1,8 +1,12 @@
 
 # With RISE, a Jupyter notebook extension, you can instantly turn your jupyter notebook into a live reveal.js-based presentation.
 . base/bin/activate
-jupyter-nbextension install rise --py --sys-prefix
-jupyter-nbextension enable rise --py --sys-prefix
+
+echo $(which python)
+
+# not needed any more ?
+# jupyter-nbextension install rise --py --sys-prefix
+# jupyter-nbextension enable rise --py --sys-prefix
 
 if [ "$1" != "" ]; then
     echo "Git Repo $1 requested..."
@@ -38,7 +42,8 @@ if [ "$OWNER" != "" ] && [ "$CONNECT_GROUP" != "" ]; then
     source bin/thisroot.sh
     cp -r $ROOTSYS/etc/notebook/kernels/root /usr/local/share/jupyter/kernels/
 
-    python -m pip --no-cache-dir install  root-pandas 
+    # Root-pandas does not recognize 6.32.04 root version?
+    # python -m pip --no-cache-dir install  root-pandas 
     
     unset JUPYTER_PATH
     unset JUPYTER_CONFIG_DIR
