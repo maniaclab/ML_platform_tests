@@ -47,6 +47,6 @@ if [ "$OWNER" != "" ] && [ "$CONNECT_GROUP" != "" ]; then
     cd /home/$OWNER
 
     # Invoke Jupyter lab as the user
-    su $OWNER -c ". base/bin/activate && jupyter lab --ServerApp.root_dir=/home/${OWNER} --no-browser --config=/usr/local/etc/jupyter_notebook_config.py"
+    su $OWNER -c ". /base/bin/activate && jupyter lab --ServerApp.root_dir=/home/${OWNER} --no-browser --config=/usr/local/etc/jupyter_notebook_config.py"
 
 fi 
